@@ -1,5 +1,4 @@
-import request from "request-promise";
-import cheerio, {Node} from "cheerio";
+
 
 interface Brands {
     id: number

@@ -1,5 +1,4 @@
 import got from 'got' ;
-
 import debug from 'debug';
 import {brands} from './models/brands'
 import {cars} from "./models/cars";
@@ -10,7 +9,6 @@ const globTime= 3000;
 const errorDebug = debug("app:error");
 
 async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
-    console.log('hi')
 
     try {
 
