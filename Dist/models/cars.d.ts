@@ -1,7 +1,8 @@
 interface Cars {
     title: string;
     image: string;
-    description: string;
+    price: number;
+    kilometer: string;
     normalText: string;
     index: number;
     city: string;
