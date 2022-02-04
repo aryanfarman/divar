@@ -80,10 +80,7 @@ async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.leng
         errorDebug(error);
     }
 }
-// car Routes
-app.use("/api/car", carRouter)
-// brand Routes
-app.use("/api/brand", brandRouter)
+
 const getEverySpecificTime = function (time = globTime, carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
 
     setInterval(() => {
@@ -100,10 +97,6 @@ const consoleEverySpecificTime = function (time = globTime, carBrand = brands[Ma
         });
     }, time)
 }
-const portListener = debug("app:listen");
-app.listen(port, () => {
-    portListener("listening to port : " + port)
-})
 const getBrands = function () {
     return brands;
 }
