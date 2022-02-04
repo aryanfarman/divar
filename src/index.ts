@@ -1,46 +1,14 @@
 import got from 'got' ;
-import express from 'express' ;
-import helmet from 'helmet';
+
 import debug from 'debug';
 import {brands} from './models/brands'
-import {carRouter, globTime} from "./routes/carRoutes";
-import {brandRouter} from "./routes/brandRoutes";
 import {cars} from "./models/cars";
 import {digitsArToEn, digitsFaToAr} from "@persian-tools/persian-tools";
-const port = process.env.PORT || 3000;
 
-let str = "";
-/*
-import cheerio, {CheerioAPI, Node} from 'cheerio';
-import request from 'request-promise';
-
- const getCat=async (url:string) => {
-        await request('https://divar.ir/s/mashhad/car', (error: any, response: { statusCode: number; }, html: string | Node | Node[] | Buffer )=>{
-            if(!error && response.statusCode===200){
-                const $ = cheerio.load(html);
-                const data = $(".kt-internal-link-list__item-content");
-                const datas = Array.from($(data));
-                const hrefs :Array<string>=[] ;
-                datas.forEach((item,i)=>{
-                    // @ts-ignore
-                    hrefs.push(data[`${i}`].attribs.href)
-                })
-                hrefs.forEach((item,i)=> {
-                    brands.push({
-                        id: i+1,
-                        name: item.substr(15)
-                    })
-                   return brands
-                })
-            }
-    })
-}*/
-
+const globTime= 3000;
 
 const errorDebug = debug("app:error");
-const app = express();
-app.use(express.json());
-app.use(helmet.hidePoweredBy());
+
 async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
     console.log('hi')
 
