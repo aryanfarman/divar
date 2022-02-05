@@ -10,6 +10,5 @@ interface Cars {
     category: string
 }
 
-const cars: Cars[]=[];
 
-export {cars,Cars}
+export {Cars}

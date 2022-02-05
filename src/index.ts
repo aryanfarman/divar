@@ -1,7 +1,7 @@
 import got from 'got' ;
-import debug from 'debug';
+import debug, {log} from 'debug';
 import {brands} from './models/brands'
-import {cars} from "./models/cars";
+import {Cars} from "./models/cars";
 import {digitsArToEn, digitsFaToAr} from "@persian-tools/persian-tools";
 
 const globTime= 3000;
@@ -15,6 +15,7 @@ async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.leng
         const response = await got(`http://api.divar.ir/v8/web-search/mashhad/car/${carBrand}`);
 
         const json = JSON.parse(response.body);
+        const cars: Cars[]=[];
         // @ts-ignore
         json.widget_list.forEach(_item => {
             if(_item.data.description.includes('تومان')) {
@@ -47,10 +48,10 @@ async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.leng
     }
 }
 
-const getEverySpecificTime = function (time = globTime, carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
-
-    setInterval(() => {
-        getCars(carBrand).then();
+const getEverySpecificTime =  function (time = globTime, carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
+    let cars: Cars[]=[];
+    setInterval(async () => {
+        cars = await getCars(carBrand).then();
     }, time)
 
     return cars;
@@ -58,8 +59,8 @@ const getEverySpecificTime = function (time = globTime, carBrand = brands[Math.f
 const consoleEverySpecificTime = function (time = globTime, carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
     const logger = debug("app:logger")
     setInterval(() => {
-        getCars(carBrand).then(() => {
-            logger(cars);
+        getCars(carBrand).then((item) => {
+            logger(item);
         });
     }, time)
 }
