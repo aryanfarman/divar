@@ -14,11 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getNames = exports.getBrands = exports.consoleEverySpecificTime = exports.getEverySpecificTime = exports.getCars = void 0;
 const got_1 = __importDefault(require("got"));
-const debug_1 = __importDefault(require("debug"));
 const brands_1 = require("./models/brands");
 const persian_tools_1 = require("@persian-tools/persian-tools");
 const globTime = 3000;
-const errorDebug = (0, debug_1.default)("app:error");
 function getCars(carBrand = brands_1.brands[Math.floor(Math.random() * (brands_1.brands.length))].name) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -54,7 +52,7 @@ function getCars(carBrand = brands_1.brands[Math.floor(Math.random() * (brands_1
             return cars;
         }
         catch (error) {
-            errorDebug(error);
+            console.log(error);
         }
     });
 }
@@ -68,10 +66,9 @@ const getEverySpecificTime = function (time = globTime, carBrand = brands_1.bran
 };
 exports.getEverySpecificTime = getEverySpecificTime;
 const consoleEverySpecificTime = function (time = globTime, carBrand = brands_1.brands[Math.floor(Math.random() * (brands_1.brands.length))].name) {
-    const logger = (0, debug_1.default)("app:logger");
     setInterval(() => {
         getCars(carBrand).then((item) => {
-            logger(item);
+            console.log(item);
         });
     }, time);
 };

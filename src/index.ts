@@ -1,12 +1,10 @@
 import got from 'got' ;
-import debug, {log} from 'debug';
 import {brands} from './models/brands'
 import {Cars} from "./models/cars";
 import {digitsArToEn, digitsFaToAr} from "@persian-tools/persian-tools";
 
 const globTime= 3000;
 
-const errorDebug = debug("app:error");
 
 async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
 
@@ -44,7 +42,7 @@ async function getCars(carBrand = brands[Math.floor(Math.random() * (brands.leng
         })
         return cars;
     } catch (error) {
-        errorDebug(error);
+        console.log(error);
     }
 }
 
@@ -57,10 +55,9 @@ const getEverySpecificTime =  function (time = globTime, carBrand = brands[Math.
     return cars;
 }
 const consoleEverySpecificTime = function (time = globTime, carBrand = brands[Math.floor(Math.random() * (brands.length))].name) {
-    const logger = debug("app:logger")
     setInterval(() => {
         getCars(carBrand).then((item) => {
-            logger(item);
+            console.log(item);
         });
     }, time)
 }
