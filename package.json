@@ -1,6 +1,6 @@
 {
   "name": "divar",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "This is for an exercise for bootcamp",
   "main": "./Dist/index.js",
   "scripts": {
